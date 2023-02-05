@@ -7,7 +7,13 @@ namespace BlogPostAPI.Interfaces.Repository
         bool CreatePost(Post Post);
         public bool Save();
         ICollection<Post> GetAllPosts();
+        ICollection<Post> GetUserPosts(long userId);
+        Post GetPost(long postId);
+        bool UpdatePost(Post post);
+        bool DeletePost(Post post);
         bool PostExists(long postId);
+
+
 
     }
 }

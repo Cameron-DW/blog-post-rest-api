@@ -13,9 +13,9 @@ namespace BlogPostAPI.Repository
             _context = context;
         }
 
-        public bool CreateUser(User User)
+        public bool CreateUser(User user)
         {
-            _context.Add(User);
+            _context.Add(user);
             return Save(); // TODO, does returning save execute the save function e.g. if there was a console.log in save, would it execute this? YES i think so
         }
 
@@ -43,7 +43,7 @@ namespace BlogPostAPI.Repository
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateUser(long userId, User user)
+        public bool UpdateUser(User user)
         {
             _context.Update(user);
             return Save();

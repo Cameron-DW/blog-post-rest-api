@@ -37,6 +37,26 @@ namespace BlogPostAPI.Repository
 
         }
 
+        public ICollection<Post> GetUserPosts(long userId)
+        {
+            return _context.Posts.Where(p => p.User.Id == userId).ToList();
+        }
 
+        public Post GetPost(long postId)
+        {
+            return _context.Posts.Where(p => p.Id == postId).FirstOrDefault();
+        }
+
+        public bool UpdatePost(Post post)
+        {
+            _context.Update(post);
+            return Save();
+        }
+
+        public bool DeletePost(Post post)
+        {
+            _context.Remove(post);
+            return Save();
+        }
     }
 }

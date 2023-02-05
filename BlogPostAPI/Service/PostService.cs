@@ -3,6 +3,7 @@ using BlogPostAPI.Dto;
 using BlogPostAPI.Interfaces.Repository;
 using BlogPostAPI.Interfaces.Services;
 using BlogPostAPI.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace BlogPostAPI.Service
 {
@@ -27,15 +28,36 @@ namespace BlogPostAPI.Service
             return _postRepository.CreatePost(post);
         }
 
+        public bool DeletePost(long postId)
+        {
+            Post post = _postRepository.GetPost(postId);
+            return _postRepository.DeletePost(post);
+        }
+
         public ICollection<PostDto> GetAllPosts()
         {
             ICollection<Post> posts = _postRepository.GetAllPosts();
             return _mapper.Map<ICollection<PostDto>>(posts);
         }
 
-        public ICollection<PostDto> GetUserPosts()
+        public PostDto GetPost(long postId)
         {
-            throw new NotImplementedException();
+            Post post = _postRepository.GetPost(postId);
+            return _mapper.Map<PostDto>(post);
+        }
+
+        public ICollection<PostDto> GetUserPosts(long userId)
+        {
+            ICollection<Post> posts = _postRepository.GetUserPosts(userId);
+            return _mapper.Map<ICollection<PostDto>>(posts);
+
+        }
+
+        public bool UpdatePost(long postId, PostDto postRequest)
+        {
+            Post post = _mapper.Map<Post>(postRequest);
+            post.Id = postId;
+            return _postRepository.UpdatePost(post);
         }
     }
 }

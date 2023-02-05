@@ -6,6 +6,10 @@ namespace BlogPostAPI.Interfaces.Services
     {
         bool CreatePost(long userId, PostDto postRequest);
         ICollection<PostDto> GetAllPosts();
-        ICollection<PostDto> GetUserPosts();
+        ICollection<PostDto> GetUserPosts(long userId);
+        PostDto GetPost(long postId);
+        bool UpdatePost(long postId, PostDto postRequest);
+        bool DeletePost(long postId);
+
     }
 }

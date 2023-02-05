@@ -44,7 +44,7 @@ namespace BlogPostAPI.Service
         {
             var user = _mapper.Map<User>(userRequest);
             user.Id = userId;
-            return _userRepository.UpdateUser(userId, user);
+            return _userRepository.UpdateUser(user);
         }
 
         public bool DeleteUser(long userId)
