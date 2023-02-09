@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BlogPostAPI.Dto;
 using BlogPostAPI.Interfaces.Services;
+using BlogPostAPI.Models.Dto;
 using BlogPostAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +8,7 @@ namespace BlogPostAPI.Controllers
 {
     [Route("api/")]
     [ApiController]
-    public class PostController : Controller
+    public class PostController : ControllerBase
     {
         private readonly IPostService _postService;
         private readonly IMapper _mapper;
@@ -50,7 +50,10 @@ namespace BlogPostAPI.Controllers
         public IActionResult UpdatePost(long postId, [FromBody] PostDto postRequest)
         {
             if (!_postService.UpdatePost(postId, postRequest))
+            {
                 return BadRequest();
+
+            }
 
             return Ok("Post Updated");
         }

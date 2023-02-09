@@ -6,7 +6,7 @@ namespace BlogPostAPI.Controllers
 {
     [Route("api/")]
     [ApiController]
-    public class TopicController : Controller
+    public class TopicController : ControllerBase
     {
         private readonly ITopicService _topicService;
         private readonly IMapper _mapper;

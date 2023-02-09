@@ -1,4 +1,3 @@
-using BlogPostAPI.Configurations;
 using BlogPostAPI.Data;
 using BlogPostAPI.Interfaces.Repository;
 using BlogPostAPI.Interfaces.Services;
@@ -34,32 +33,9 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig")); // configures the JwtConfig class to get the Section from appsettings.json
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(jwt => // tells the middleware that the key for encrypting and decrypting is in the appsettings.json
-    {
-        var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
 
-        jwt.SaveToken = true; // store token in header.
-        jwt.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuerSigningKey = true, // for every token we recieve, check key within it check it uses same encryption?
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false, // for dev (deployment make it true)
-            ValidateAudience = false, // for dev
-            RequireExpirationTime = false, // for dev
-            ValidateLifetime = true // uses the expiration date of the token to determine if it is valid token
-        };
-        // verify that token that receive is generated from our application, not random token.
-
-    });
 
 var app = builder.Build();
 

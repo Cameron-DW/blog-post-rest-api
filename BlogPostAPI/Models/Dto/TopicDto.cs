@@ -1,4 +1,4 @@
-﻿namespace BlogPostAPI.Dto
+﻿namespace BlogPostAPI.Models.Dto
 {
     public class TopicDto
     {

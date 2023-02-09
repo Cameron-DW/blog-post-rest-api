@@ -1,5 +1,7 @@
 ﻿using BlogPostAPI.Data;
 using BlogPostAPI.Interfaces.Repository;
+using BlogPostAPI.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace BlogPostAPI.Repository
 {
@@ -22,6 +24,51 @@ namespace BlogPostAPI.Repository
         {
             return _context.Comments.Any(c => c.Id == commentId);
 
+        }
+
+        public bool CreateComment(Comment Comment)
+        {
+            _context.Add(Comment);
+            return Save();
+
+        }
+
+        public ICollection<Comment> GetAllComments()
+        {
+            ICollection<Comment> comments = _context.Comments.OrderBy(c => c.Id).ToList();
+            return comments;
+        }
+
+        public ICollection<Comment> GetUserComments(long userId)
+        {
+            return _context.Comments.Where(c => c.User.Id == userId).ToList();
+        }
+
+        public ICollection<Comment> GetPostComments(long postId)
+        {
+            return _context.Comments.Where(c => c.Post.Id == postId).ToList();
+        }
+
+        public Comment GetComment(long commentId)
+        {
+            return _context.Comments.Where(c => c.Id == commentId).FirstOrDefault();
+        }
+
+        public bool UpdateComment(Comment comment)
+        {
+            _context.Update(comment);
+            return Save();
+        }
+
+        public bool DeleteComment(Comment comment)
+        {
+            _context.Remove(comment);
+            return Save();
+        }
+
+        public bool PostComment(Comment comment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

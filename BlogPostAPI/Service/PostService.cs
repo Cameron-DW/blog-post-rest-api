@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using BlogPostAPI.Dto;
 using BlogPostAPI.Interfaces.Repository;
 using BlogPostAPI.Interfaces.Services;
 using BlogPostAPI.Models;
+using BlogPostAPI.Models.Dto;
 using Microsoft.Extensions.Hosting;
 
 namespace BlogPostAPI.Service

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using BlogPostAPI.Dto;
 using BlogPostAPI.Interfaces.Services;
 using BlogPostAPI.Models;
+using BlogPostAPI.Models.Dto;
 using BlogPostAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +9,7 @@ namespace BlogPostAPI.Controllers
 {
     [Route("api/users")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;

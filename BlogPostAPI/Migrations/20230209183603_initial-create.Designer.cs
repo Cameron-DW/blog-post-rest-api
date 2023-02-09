@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogPostAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230204180939_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230209183603_initial-create")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace BlogPostAPI.Migrations
 
             modelBuilder.Entity("BlogPostAPI.Models.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("PostId")
                         .HasColumnType("bigint");

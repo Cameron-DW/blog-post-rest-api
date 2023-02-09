@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BlogPostAPI.Dto;
 using BlogPostAPI.Models;
+using BlogPostAPI.Models.Dto;
 
 namespace BlogPostAPI.Helper
 {
