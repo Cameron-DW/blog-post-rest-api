@@ -6,7 +6,6 @@ namespace BlogPostAPI.Data
 {
     public class DataContext : DbContext
     {
-
         public DataContext(DbContextOptions<DataContext> options) : base(options) {
         
         }
@@ -17,12 +16,8 @@ namespace BlogPostAPI.Data
         public DbSet<Topic> Topics { get; set; }
         public DbSet<User> Users { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-
-
             builder.Entity<PostTopic>()
                 .HasKey(pt => new { pt.PostId, pt.TopicId });
             builder.Entity<PostTopic>()
@@ -33,9 +28,6 @@ namespace BlogPostAPI.Data
                 .HasOne(pt => pt.Topic)
                 .WithMany(t => t.PostTopics)
                 .HasForeignKey(pt => pt.TopicId);
-
         }
-
-
     }
 }

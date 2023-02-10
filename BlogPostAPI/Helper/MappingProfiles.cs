@@ -16,8 +16,6 @@ namespace BlogPostAPI.Helper
             CreateMap<TopicDto, Topic>();
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
-            
-
         }
     }
 }

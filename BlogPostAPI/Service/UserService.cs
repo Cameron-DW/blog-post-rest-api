@@ -25,19 +25,16 @@ namespace BlogPostAPI.Service
             return _userRepository.CreateUser(user);
         }
 
-      
+        public ICollection<UserDto> GetAllUsers()
+        {
+            ICollection<User> users = _userRepository.GetAllUsers();
+            return _mapper.Map<ICollection<UserDto>>(users);
+        }
 
         public UserDto GetUser(long userId)
         {
             User user = _userRepository.GetUser(userId);
             return _mapper.Map<UserDto>(user);
-        }
-
-
-        public ICollection<UserDto> GetAllUsers()
-        {   
-            ICollection<User> users = _userRepository.GetAllUsers();
-            return _mapper.Map<ICollection<UserDto>>(users);
         }
 
         public bool UpdateUser(long userId, UserDto userRequest)

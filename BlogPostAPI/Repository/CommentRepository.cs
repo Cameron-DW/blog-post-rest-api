@@ -14,18 +14,6 @@ namespace BlogPostAPI.Repository
             _context = context;
         }
 
-        public bool Save()
-        {
-            var saved = _context.SaveChanges(); // TODO is var good to use?
-            return saved > 0 ? true : false;
-        }
-
-        public bool CommentExists(long commentId)
-        {
-            return _context.Comments.Any(c => c.Id == commentId);
-
-        }
-
         public bool CreateComment(Comment Comment)
         {
             _context.Add(Comment);
@@ -66,9 +54,16 @@ namespace BlogPostAPI.Repository
             return Save();
         }
 
-        public bool PostComment(Comment comment)
+        public bool CommentExists(long commentId)
         {
-            throw new NotImplementedException();
+            return _context.Comments.Any(c => c.Id == commentId);
+
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges(); 
+            return saved > 0 ? true : false;
         }
     }
 }

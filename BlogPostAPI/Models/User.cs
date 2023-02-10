@@ -9,6 +9,5 @@
         public string Password { get; set; }
         ICollection<Post> Posts { get; set; }
         ICollection<Comment> Comments { get; set; }
-
     }
 }

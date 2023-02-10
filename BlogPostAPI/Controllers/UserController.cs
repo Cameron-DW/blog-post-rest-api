@@ -21,30 +21,29 @@ namespace BlogPostAPI.Controllers
             _mapper = mapper;
         }
 
-        // Get User
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            ICollection<UserDto> users = _userService.GetAllUsers();
-
-            return Ok(users);
-        }
-
-        [HttpGet("{userId}")]
-        public IActionResult GetUser(long userId) {
-            UserDto user = _userService.GetUser(userId);
-            return Ok(user);
-        }
-
         // Create User
         [HttpPost]
         public IActionResult CreateUser([FromBody] UserDto userRequest)
         {
-            if (!_userService.CreateUser(userRequest)) {
+            if (!_userService.CreateUser(userRequest))
                 return BadRequest();
-            }
 
             return Ok("User Created");
+        }
+
+        // Get User
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            ICollection<UserDto> users = _userService.GetAllUsers();
+            return Ok(users);
+        }
+        
+        // Get User
+        [HttpGet("{userId}")]
+        public IActionResult GetUser(long userId) {
+            UserDto user = _userService.GetUser(userId);
+            return Ok(user);
         }
 
         // Update User
@@ -52,23 +51,18 @@ namespace BlogPostAPI.Controllers
         public IActionResult UpdateUser(long userId, [FromBody] UserDto userRequest)
         {
             if (!_userService.UpdateUser(userId, userRequest))
-            {
                 return BadRequest();
-            }
-
+            
             return Ok("User Updated");
         }
-
 
         // Delete User
         [HttpDelete("{userId}")]
         public IActionResult DeleteUser(long userId)
         {
             if (!_userService.DeleteUser(userId))
-            {
                 return BadRequest();
-            }
-
+            
             return NoContent();
         }
     }

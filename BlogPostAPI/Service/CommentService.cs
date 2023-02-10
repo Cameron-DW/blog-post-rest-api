@@ -35,27 +35,9 @@ namespace BlogPostAPI.Service
             return _commentRepository.CreateComment(comment);
         }
 
-        public bool DeleteComment(long commentId)
-        {
-            Comment comment = _commentRepository.GetComment(commentId);
-            return _commentRepository.DeleteComment(comment);
-        }
-
         public ICollection<CommentDto> GetAllComments()
         {
             ICollection<Comment> comments = _commentRepository.GetAllComments();
-            return _mapper.Map<ICollection<CommentDto>>(comments);
-        }
-
-        public CommentDto GetComment(long commentId)
-        {
-            Comment comment = _commentRepository.GetComment(commentId);
-            return _mapper.Map<CommentDto>(comment);
-        }
-
-        public ICollection<CommentDto> GetPostComments(long postId)
-        {
-            ICollection<Comment> comments = _commentRepository.GetPostComments(postId);
             return _mapper.Map<ICollection<CommentDto>>(comments);
         }
 
@@ -65,11 +47,29 @@ namespace BlogPostAPI.Service
             return _mapper.Map<ICollection<CommentDto>>(comments);
         }
 
+        public ICollection<CommentDto> GetPostComments(long postId)
+        {
+            ICollection<Comment> comments = _commentRepository.GetPostComments(postId);
+            return _mapper.Map<ICollection<CommentDto>>(comments);
+        }
+
+        public CommentDto GetComment(long commentId)
+        {
+            Comment comment = _commentRepository.GetComment(commentId);
+            return _mapper.Map<CommentDto>(comment);
+        }
+
         public bool UpdateComment(long commentId, CommentDto commentRequest)
         {
             Comment comment = _mapper.Map<Comment>(commentRequest);
             comment.Id = commentId;
             return _commentRepository.UpdateComment(comment);
+        }
+
+        public bool DeleteComment(long commentId)
+        {
+            Comment comment = _commentRepository.GetComment(commentId);
+            return _commentRepository.DeleteComment(comment);
         }
     }
 }

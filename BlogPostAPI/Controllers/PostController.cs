@@ -18,12 +18,21 @@ namespace BlogPostAPI.Controllers
             _mapper = mapper;
         }
 
+        // Create Post for User
+        [HttpPost("users/{userId}/posts")]
+        public IActionResult CreatePost(long userId, [FromBody] PostDto postRequest)
+        {
+            if (!_postService.CreatePost(userId, postRequest))
+                return BadRequest(ModelState)
+
+            return Ok("Post Created");
+        }
+
         // Get All Posts
         [HttpGet("posts")]
         public IActionResult GetAllPosts()
         {
             ICollection<PostDto> posts = _postService.GetAllPosts();
-
             return Ok(posts);
         }
 
@@ -32,7 +41,14 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetUserPosts(long userId)
         {
             ICollection<PostDto> posts = _postService.GetUserPosts(userId);
+            return Ok(posts);
+        }
 
+        // Get All Posts from a Topic
+        [HttpGet("topics/{topicId}/posts")]
+        public IActionResult GetPostsFromTopic(long topicId)
+        {
+            ICollection<PostDto> posts = _postService.GetPostsFromTopic(topicId);
             return Ok(posts);
         }
 
@@ -41,7 +57,6 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetPost(long postId)
         {
             PostDto post = _postService.GetPost(postId);
-
             return Ok(post);
         }
 
@@ -50,10 +65,7 @@ namespace BlogPostAPI.Controllers
         public IActionResult UpdatePost(long postId, [FromBody] PostDto postRequest)
         {
             if (!_postService.UpdatePost(postId, postRequest))
-            {
                 return BadRequest();
-
-            }
 
             return Ok("Post Updated");
         }
@@ -66,19 +78,6 @@ namespace BlogPostAPI.Controllers
                 return BadRequest();
 
             return NoContent();
-        }
-
-
-        // Create Post for User
-        [HttpPost("users/{userId}/posts")]
-        public IActionResult CreatePost(long userId, [FromBody] PostDto postRequest)
-        {
-            if (!_postService.CreatePost(userId, postRequest))
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok("Post Created");
         }
     }
 }

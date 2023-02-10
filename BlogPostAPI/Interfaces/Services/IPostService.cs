@@ -8,9 +8,9 @@ namespace BlogPostAPI.Interfaces.Services
         bool CreatePost(long userId, PostDto postRequest);
         ICollection<PostDto> GetAllPosts();
         ICollection<PostDto> GetUserPosts(long userId);
+        ICollection<PostDto> GetPostsFromTopic(long topicId);
         PostDto GetPost(long postId);
         bool UpdatePost(long postId, PostDto postRequest);
         bool DeletePost(long postId);
-
     }
 }

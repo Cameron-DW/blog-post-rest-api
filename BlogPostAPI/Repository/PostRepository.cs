@@ -25,21 +25,13 @@ namespace BlogPostAPI.Repository
             return posts;
         }
 
-        public bool Save()
-        {
-            var saved = _context.SaveChanges(); // TODO is var good to use?
-            return saved > 0 ? true : false;
-        }
-
-        public bool PostExists(long postId)
-        {
-            return _context.Posts.Any(p => p.Id == postId);
-
-        }
-
         public ICollection<Post> GetUserPosts(long userId)
         {
             return _context.Posts.Where(p => p.User.Id == userId).ToList();
+        }
+        public ICollection<Post> GetPostsFromTopic(long topicId)
+        {
+            return _context.PostTopics.Where(pt => pt.Topic.Id == topicId).Select(pt => pt.Post).ToList();
         }
 
         public Post GetPost(long postId)
@@ -57,6 +49,18 @@ namespace BlogPostAPI.Repository
         {
             _context.Remove(post);
             return Save();
+        }
+
+        public bool PostExists(long postId)
+        {
+            return _context.Posts.Any(p => p.Id == postId);
+
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges(); // TODO is var good to use?
+            return saved > 0 ? true : false;
         }
     }
 }

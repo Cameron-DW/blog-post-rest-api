@@ -24,9 +24,7 @@ namespace BlogPostAPI.Controllers
         public IActionResult CreateComment(long userId, long postId, [FromBody] CommentDto commentRequest)
         {
             if (!_commentService.CreateComment(userId, postId, commentRequest))
-            {
                 return BadRequest(ModelState);
-            }
 
             return Ok("Comment Created");
         }
@@ -36,7 +34,6 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetAllComments()
         {
             ICollection<CommentDto> comments = _commentService.GetAllComments();
-
             return Ok(comments);
         }
 
@@ -45,7 +42,6 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetUserComments(long userId)
         {
             ICollection<CommentDto> comments = _commentService.GetUserComments(userId);
-
             return Ok(comments);
         }
 
@@ -54,7 +50,6 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetPostComments(long postId)
         {
             ICollection<CommentDto> comments = _commentService.GetPostComments(postId);
-
             return Ok(comments);
         }
 
@@ -63,10 +58,8 @@ namespace BlogPostAPI.Controllers
         public IActionResult GetPost(long commentId)
         {
             CommentDto comment = _commentService.GetComment(commentId);
-
             return Ok(comment);
         }
-
 
         // Update Comment
         [HttpPut("comments/{commentId}")]
@@ -87,6 +80,5 @@ namespace BlogPostAPI.Controllers
 
             return NoContent();
         }
-
     }
 }
