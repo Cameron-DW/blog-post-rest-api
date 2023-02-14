@@ -1,4 +1,4 @@
-# asp.net-6.0-blog-post-web-api
+# .net-6.0-blog-post-web-api
 
 Restful CRUD API using .NET 6.0 where Users can create an account, can create Posts and create/add Topics to these Posts. Users can also comment on theirs and others Posts. All user data is saved to a relational database using SQL queries.
 
